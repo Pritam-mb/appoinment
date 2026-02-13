@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    confirmmationId:{
+    confirmationId:{
         type: String,
     },
     refreshToken: {

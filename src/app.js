@@ -20,6 +20,17 @@ app.use(ratelimit({
 // Routes
 app.use('/api/auth', authRoutes);
 
+// Error handling middleware
+app.use((error, req, res, next) => {
+    const { statusCode = 500, message = "Something went wrong" } = error;
+    
+    return res.status(statusCode).json({
+        success: false,
+        message,
+        ...(process.env.NODE_ENV === "development" && { stack: error.stack })
+    });
+});
+
 // Health check route
 app.get('/api/health', (req, res) => {
     res.json({ 
